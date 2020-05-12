@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>UpdateRecipe</title>
+    <style>
+	    body {
+        background: rgb(226,225,139);
+        background: radial-gradient(circle, rgba(226,225,139,1) 23%, rgba(235,199,106,1) 83%);
+        }
+        form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 450px;
+        width: 350px;
+        transform: translate(-50%, -50%);
+        background:#ffd54f;
+        padding: 70px 30px;
+        border-radius: 24px;
+        -webkit-box-shadow: 6px 7px 146px 18px rgba(0,0,0,0.82);
+        -moz-box-shadow: 6px 7px 146px 18px rgba(0,0,0,0.82);
+        box-shadow: 6px 7px 146px 18px rgba(0,0,0,0.82);
+        }
+        h1 {
+        margin: 0;
+        padding: 0 0 20px;
+        text-align: center;
+        font-size: 22px;
+        }
+        label {
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        }
+        input {
+        width: 100%;
+        margin: 0;
+        }
+        input[type="text"] {
+        border: none;
+        border-bottom: 1px solid #000;
+        background: transparent;
+        outline: none;
+        height: 40px;
+        color: #fff;
+        font-size: 16px;
+        }
+        input[type="text"]:last-of-type {
+        margin-bottom: 20px;
+        }
+        input[type="submit"] {
+        border: none;
+        outline: none;
+        height: 40px;
+        background: #ff9100;
+        color: #000;
+        font-size: 18px;
+        border-radius: 20px;
+        }
+        input[type="submit"]:hover {
+        cursor: pointer;
+        background: aquamarine;
+        color: #fff;
+        }
+    </style>
+</head>
+<body>
+<a href="@Url.Action("HomePage", "Main")">HomePage</a>
+<div>
+	<form action="/Main/ChangeRecipe" method="get">
+		<h1>Update</h1>
+		<label for="id">ID:</label>
+		<input type="text" id="id" name="id">
+		<br><br>
+
+		<label for="author">Author:</label>
+		<input type="text" id="author" name="author">
+		<br><br>
+
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name">
+		<br><br>
+
+		<label for="type">Type:</label>
+		<input type="text" id="type" name="type">
+		<br><br>
+
+		<label for="description">Description:</label>
+		<input type="text" id="description" name="description">
+		<br><br>
+
+		<input type="submit" value="Update Recipe"/>
+	</form>
+</div>
+</body>
+</html>

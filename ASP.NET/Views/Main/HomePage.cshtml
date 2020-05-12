@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+    // ViewBag.Title = "HomePage";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>HomePage</title>
+    <style>
+        body {
+        background: rgb(226,225,139);
+        background: radial-gradient(circle, rgba(226,225,139,1) 23%, rgba(235,199,106,1) 83%);
+        }
+        .menu {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        }
+        table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-radius: 12px 12px 0 0;
+        overflow: hidden;
+        box-shadow: 0 5px 12px rgba(32,32,32,.3);
+        background: #fafafa;
+        text-align: center;
+        width: 600px;
+        height: 400px;
+        }
+        th, td {
+        padding: 10px 15px;
+        }
+        th {
+        background: #ff9100;
+        color: #fafafa;
+        text-transform: uppercase;
+        }
+        tr:nth-child(odd) {
+        background-color: #eeeeee;
+        }
+        .buttonGroup {
+        display: flex;
+        flex-direction: column;
+        margin-right: 16px;
+        justify-content: center;
+        }
+        .buttonGroup input[type="button"]{
+        height: 50px;
+        width: 180px;
+        border: 1px solid wheat;
+        font-size: 16px;
+        text-align: center;
+        background-color: #ff9100;
+        border-radius: 6px;
+        margin-bottom: .5em;
+        color: #fafafa;
+        text-transform: uppercase;
+        }
+        .buttonGroup input[type="button"]:hover {
+        background-color: aquamarine;
+        }
+        select {
+        margin-bottom: 28px;
+        height: 32px;
+        border-radius: 12px;
+        width: 200px;
+        }
+        h1 {
+        font-family: monospace;
+        text-align: center;
+        color: #ff9100;
+        }
+    </style>
+    <script src="~/Content/font-awesome.css"></script>
+    <script src="~/Content/font-awesome.min.css"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          $.get("/Main/GetRecipes", function(data, status) {
+            $("#maindiv").html(data);
+          })
+          $('select').on('change', function() {
+            $.get("/Main/FilterRecipesByType", {type: this.value}, function(data, status) {
+              $("#maindiv").html(data);
+            });
+          });
+        });
+    </script>
+</head>
+<body>
+<a href="@Url.Action("Logout", "Logout")"><i class="fas fa-sign-out-alt">Logout</i></a>
+<h1>Welcome @Session["Username"].ToString()!</h1>
+<br><br>
+<div class="menu">
+    <div class="buttonGroup">
+        <input type="button" value="Add" onclick="location.href='@Url.Action("AddRecipe", "Main")'"/>
+        <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteRecipe", "Main")'"/>
+        <input type="button" value="Update" onclick="location.href='@Url.Action("UpdateRecipe", "Main")'"/>
+    </div>
+    <div class="recipe-menu">
+        <select id="list" name="list">
+            <option value="">Select a type</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Desert">Desert</option>
+            <option value="Main">Main</option>
+            <option value="Soup">Soup</option>
+            <option value="Appetizer">Appetizer</option>
+        </select>
+        <div id="maindiv"></div>
+    </div>
+</div>
+</body>
+</html>
